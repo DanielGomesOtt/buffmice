@@ -1,11 +1,10 @@
 package com.danielott.BackendBuffMice.domain.user;
 
 
+import com.danielott.BackendBuffMice.domain.user.dto.UsersRegisterDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.Valid;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +13,7 @@ import java.util.List;
 @Table(name = "users")
 @Entity(name = "Users")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -25,6 +25,10 @@ public class Users implements UserDetails {
     private String name;
     private String email;
     private String password;
+    private int status;
+
+    public Users(@Valid UsersRegisterDTO data) {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
