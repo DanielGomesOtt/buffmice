@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.util.List;
-import java.util.Objects;
+
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping(path = "/users")
 public class UsersController {
 
     @Autowired
     private UsersService service;
 
-    @PostMapping
+    @PostMapping("/register")
     @Transactional
     public ResponseEntity save (@RequestBody @Valid UsersRegisterDTO data, UriComponentsBuilder uriBuilder) {
         var user = new Users(data);

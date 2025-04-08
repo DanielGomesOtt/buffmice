@@ -20,10 +20,11 @@ public class UsersService {
     private TokenService tokenService;
 
     public String save (Users user) {
-        var passwordEncoder = security.passwordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setStatus(1);
         try {
+            var passwordEncoder = security.passwordEncoder();
+            String passwordEncoded = passwordEncoder.encode(user.getPassword());
+            user.setPassword(passwordEncoded);
+            user.setStatus(1);
             repository.save(user);
             return tokenService.signToken(user);
         } catch (RuntimeException e) {
