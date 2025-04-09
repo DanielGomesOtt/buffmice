@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/users")
+@RequestMapping("/users")
 public class UsersController {
 
     @Autowired
