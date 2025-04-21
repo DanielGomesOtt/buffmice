@@ -1,6 +1,6 @@
 package com.danielott.BackendBuffMice.services;
 
-import com.danielott.BackendBuffMice.domain.user.repositories.UsersRepository;
+import com.danielott.BackendBuffMice.domain.users.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

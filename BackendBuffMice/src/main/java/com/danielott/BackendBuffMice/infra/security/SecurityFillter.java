@@ -1,6 +1,6 @@
 package com.danielott.BackendBuffMice.infra.security;
 
-import com.danielott.BackendBuffMice.domain.user.repositories.UsersRepository;
+import com.danielott.BackendBuffMice.domain.users.repositories.UsersRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

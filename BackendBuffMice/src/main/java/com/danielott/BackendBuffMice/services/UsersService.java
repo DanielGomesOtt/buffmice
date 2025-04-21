@@ -1,7 +1,7 @@
 package com.danielott.BackendBuffMice.services;
 
-import com.danielott.BackendBuffMice.domain.user.Users;
-import com.danielott.BackendBuffMice.domain.user.repositories.UsersRepository;
+import com.danielott.BackendBuffMice.domain.users.Users;
+import com.danielott.BackendBuffMice.domain.users.repositories.UsersRepository;
 import com.danielott.BackendBuffMice.infra.security.SecurityConfiguration;
 import com.danielott.BackendBuffMice.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.danielott.BackendBuffMice.controllers;
 
 import com.danielott.BackendBuffMice.domain.auth.AuthResponseDTO;
-import com.danielott.BackendBuffMice.domain.user.Users;
-import com.danielott.BackendBuffMice.domain.user.dto.UserLoginDTO;
+import com.danielott.BackendBuffMice.domain.users.Users;
+import com.danielott.BackendBuffMice.domain.users.dto.UserLoginDTO;
 import com.danielott.BackendBuffMice.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

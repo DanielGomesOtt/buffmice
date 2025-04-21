@@ -1,4 +1,4 @@
-package com.danielott.BackendBuffMice.domain.user.dto;
+package com.danielott.BackendBuffMice.domain.users.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

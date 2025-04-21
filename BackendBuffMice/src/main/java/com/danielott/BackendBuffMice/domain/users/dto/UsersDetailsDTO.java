@@ -1,6 +1,6 @@
-package com.danielott.BackendBuffMice.domain.user.dto;
+package com.danielott.BackendBuffMice.domain.users.dto;
 
-import com.danielott.BackendBuffMice.domain.user.Users;
+import com.danielott.BackendBuffMice.domain.users.Users;
 
 public record UsersDetailsDTO (
 

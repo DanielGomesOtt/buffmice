@@ -1,9 +1,9 @@
 package com.danielott.BackendBuffMice.controllers;
 
 import com.danielott.BackendBuffMice.domain.token.dto.TokenReponseDTO;
-import com.danielott.BackendBuffMice.domain.user.Users;
-import com.danielott.BackendBuffMice.domain.user.dto.UsersDetailsDTO;
-import com.danielott.BackendBuffMice.domain.user.dto.UsersRegisterDTO;
+import com.danielott.BackendBuffMice.domain.users.Users;
+import com.danielott.BackendBuffMice.domain.users.dto.UsersDetailsDTO;
+import com.danielott.BackendBuffMice.domain.users.dto.UsersRegisterDTO;
 import com.danielott.BackendBuffMice.services.UsersService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

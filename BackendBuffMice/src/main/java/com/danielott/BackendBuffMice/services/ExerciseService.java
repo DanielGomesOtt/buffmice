@@ -13,7 +13,6 @@ public class ExerciseService {
     private ExerciseRepository repository;
 
     public Stream<ExerciseListDTO> findAll (String name, String muscle) {
-
         if (name != null && muscle != null) {
             var exercises = repository.findByNameContainingIgnoreCaseOrMuscleContainingIgnoreCase(name, muscle).stream().map(ExerciseListDTO::new);
             return exercises;

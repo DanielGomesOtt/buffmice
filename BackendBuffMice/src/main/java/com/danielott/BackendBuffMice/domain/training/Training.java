@@ -1,6 +1,6 @@
 package com.danielott.BackendBuffMice.domain.training;
 
-import com.danielott.BackendBuffMice.domain.user.Users;
+import com.danielott.BackendBuffMice.domain.users.Users;
 import jakarta.persistence.*;
 import lombok.*;
 

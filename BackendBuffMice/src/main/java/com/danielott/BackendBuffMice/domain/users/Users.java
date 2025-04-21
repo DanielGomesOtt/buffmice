@@ -1,6 +1,6 @@
-package com.danielott.BackendBuffMice.domain.user;
+package com.danielott.BackendBuffMice.domain.users;
 
-import com.danielott.BackendBuffMice.domain.user.dto.UsersRegisterDTO;
+import com.danielott.BackendBuffMice.domain.users.dto.UsersRegisterDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
