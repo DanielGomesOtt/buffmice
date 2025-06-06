@@ -3,7 +3,7 @@ package com.danielott.BackendBuffMice.services;
 import com.danielott.BackendBuffMice.domain.exercise.repositories.ExerciseRepository;
 import com.danielott.BackendBuffMice.domain.training.repositories.TrainingRepository;
 import com.danielott.BackendBuffMice.domain.training_exercises.TrainingExercises;
-import com.danielott.BackendBuffMice.domain.training_exercises.TrainingExercisesRepository;
+import com.danielott.BackendBuffMice.domain.training_exercises.repositories.TrainingExercisesRepository;
 import com.danielott.BackendBuffMice.domain.training_exercises.dto.TrainingExercisesCreatedDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

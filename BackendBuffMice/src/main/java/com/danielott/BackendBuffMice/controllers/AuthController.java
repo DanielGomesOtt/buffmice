@@ -1,6 +1,6 @@
 package com.danielott.BackendBuffMice.controllers;
 
-import com.danielott.BackendBuffMice.domain.auth.AuthResponseDTO;
+import com.danielott.BackendBuffMice.domain.auth.dto.AuthResponseDTO;
 import com.danielott.BackendBuffMice.domain.users.Users;
 import com.danielott.BackendBuffMice.domain.users.dto.UserLoginDTO;
 import com.danielott.BackendBuffMice.infra.security.TokenService;

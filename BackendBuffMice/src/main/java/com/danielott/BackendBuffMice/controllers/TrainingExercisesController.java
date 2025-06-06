@@ -20,6 +20,6 @@ public class TrainingExercisesController {
     @Transactional
     public ResponseEntity save (@RequestBody @Valid List<TrainingExercisesCreatedDTO> data) {
         service.save(data);
-        return ResponseEntity.ok(data);
+        return ResponseEntity.status(201).build();
     }
 }
