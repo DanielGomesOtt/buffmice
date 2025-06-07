@@ -4,12 +4,16 @@ import com.danielott.BackendBuffMice.domain.exercise.Exercise;
 import com.danielott.BackendBuffMice.domain.exercise.repositories.ExerciseRepository;
 import com.danielott.BackendBuffMice.domain.exercise_observation.ExerciseObservation;
 import com.danielott.BackendBuffMice.domain.exercise_observation.dto.ExerciseObservationCreatedDTO;
+import com.danielott.BackendBuffMice.domain.exercise_observation.dto.ExerciseObservationFormattedDTO;
 import com.danielott.BackendBuffMice.domain.exercise_observation.repositories.ExerciseObservationRepository;
 import com.danielott.BackendBuffMice.domain.users.Users;
 import com.danielott.BackendBuffMice.domain.users.repositories.UsersRepository;
-import org.apache.catalina.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 
 @Service
 public class ExerciseObservationService {
@@ -27,7 +31,7 @@ public class ExerciseObservationService {
         try {
             Users user = usersRepository.findById(data.user_id()).get();
             Exercise exercise = exerciseRepository.findById(data.exercise_id()).get();
-            ExerciseObservation exerciseObservation = new ExerciseObservation(null, exercise, user, data.observation(), data.status());
+            ExerciseObservation exerciseObservation = new ExerciseObservation(exercise, user, data.observation(), data.status());
             repository.save(exerciseObservation);
             return new ExerciseObservationCreatedDTO(exerciseObservation);
 
@@ -35,4 +39,22 @@ public class ExerciseObservationService {
             throw new RuntimeException(e);
         }
     }
+
+    public List<ExerciseObservationFormattedDTO> find(Long exercise_id, Long user_id) {
+        try {
+
+            Users user = usersRepository.findById(user_id).get();
+            Exercise exercise = exerciseRepository.findById(exercise_id).get();
+
+            List<ExerciseObservationFormattedDTO> exerciseObservations = repository
+                    .findByExerciseAndUserAndStatus(exercise, user, 1).stream()
+                    .map(ExerciseObservationFormattedDTO::new).toList();
+            return exerciseObservations;
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

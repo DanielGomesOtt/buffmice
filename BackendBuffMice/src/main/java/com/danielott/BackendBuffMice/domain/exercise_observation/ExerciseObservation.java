@@ -29,7 +29,7 @@ public class ExerciseObservation {
     private String observation;
     private int status;
 
-    public ExerciseObservation(Long id, Exercise exercise, Users user, String observation, int status) {
+    public ExerciseObservation(Exercise exercise, Users user, String observation, int status) {
         this.user = user;
         this.exercise = exercise;
         this.observation = observation;
