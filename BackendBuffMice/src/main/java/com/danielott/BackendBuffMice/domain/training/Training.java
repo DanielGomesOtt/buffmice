@@ -36,4 +36,16 @@ public class Training {
         this.status = data.status();
     }
 
+    public Training(Long id, String title, Date limit_date, Users user, int status) {
+        this.id = id;
+        this.title = title;
+        this.limit_date = limit_date;
+        this.user = user;
+        this.status = status;
+    }
+
+    public Training(Long id, int status) {
+        this.id = id;
+        this.status = status;
+    }
 }

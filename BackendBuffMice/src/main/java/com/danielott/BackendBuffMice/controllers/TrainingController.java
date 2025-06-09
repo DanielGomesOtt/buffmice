@@ -1,16 +1,15 @@
 package com.danielott.BackendBuffMice.controllers;
 
 
+import com.danielott.BackendBuffMice.domain.training.Training;
 import com.danielott.BackendBuffMice.domain.training.dto.TrainingCreatedDTO;
+import com.danielott.BackendBuffMice.domain.training.dto.TrainingUpdateDTO;
 import com.danielott.BackendBuffMice.services.TrainingService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -26,4 +25,20 @@ public class TrainingController {
         service.save(data);
         return ResponseEntity.status(201).build();
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<TrainingUpdateDTO> update (@RequestBody @Valid TrainingUpdateDTO data) {
+        Training updatedTraining = service.update(data);
+        TrainingUpdateDTO formattedUpdatedTraining = new TrainingUpdateDTO(updatedTraining);
+        return ResponseEntity.ok(formattedUpdatedTraining);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity delete (@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
