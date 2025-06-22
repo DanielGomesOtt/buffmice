@@ -26,4 +26,5 @@ public class TrainingExercises {
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
     private int status;
+
 }

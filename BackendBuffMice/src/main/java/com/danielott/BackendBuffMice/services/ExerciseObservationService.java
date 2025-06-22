@@ -32,8 +32,8 @@ public class ExerciseObservationService {
             Users user = usersRepository.findById(data.user_id()).get();
             Exercise exercise = exerciseRepository.findById(data.exercise_id()).get();
             ExerciseObservation exerciseObservation = new ExerciseObservation(exercise, user, data.observation(), data.status());
-            repository.save(exerciseObservation);
-            return new ExerciseObservationCreatedDTO(exerciseObservation);
+            ExerciseObservation createdExerciseObservation = repository.save(exerciseObservation);
+            return new ExerciseObservationCreatedDTO(createdExerciseObservation);
 
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
@@ -42,15 +42,11 @@ public class ExerciseObservationService {
 
     public List<ExerciseObservationFormattedDTO> find(Long exercise_id, Long user_id) {
         try {
-
             Users user = usersRepository.findById(user_id).get();
             Exercise exercise = exerciseRepository.findById(exercise_id).get();
-
-            List<ExerciseObservationFormattedDTO> exerciseObservations = repository
+            return repository
                     .findByExerciseAndUserAndStatus(exercise, user, 1).stream()
                     .map(ExerciseObservationFormattedDTO::new).toList();
-            return exerciseObservations;
-
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }

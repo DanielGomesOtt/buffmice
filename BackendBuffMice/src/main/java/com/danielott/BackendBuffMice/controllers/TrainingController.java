@@ -3,6 +3,7 @@ package com.danielott.BackendBuffMice.controllers;
 
 import com.danielott.BackendBuffMice.domain.training.Training;
 import com.danielott.BackendBuffMice.domain.training.dto.TrainingCreatedDTO;
+import com.danielott.BackendBuffMice.domain.training.dto.TrainingFormatted;
 import com.danielott.BackendBuffMice.domain.training.dto.TrainingUpdateDTO;
 import com.danielott.BackendBuffMice.services.TrainingService;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -21,9 +24,9 @@ public class TrainingController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity save (@RequestBody @Valid TrainingCreatedDTO data) {
-        service.save(data);
-        return ResponseEntity.status(201).build();
+    public ResponseEntity<TrainingCreatedDTO> save (@RequestBody @Valid TrainingCreatedDTO data) {
+        TrainingCreatedDTO createdTraining = service.save(data);
+        return ResponseEntity.status(201).body(createdTraining);
     }
 
     @PutMapping
@@ -41,4 +44,9 @@ public class TrainingController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{usersId}")
+    public ResponseEntity<List<TrainingFormatted>> getTrainingByUser(@PathVariable Long usersId) {
+        List<TrainingFormatted> trainings = service.getTrainingByUser(usersId);
+        return ResponseEntity.ok(trainings);
+    }
 }

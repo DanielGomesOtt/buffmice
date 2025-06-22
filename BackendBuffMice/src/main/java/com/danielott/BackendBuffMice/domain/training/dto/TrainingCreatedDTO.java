@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 public record TrainingCreatedDTO(
+        Long id,
+
         @NotBlank
         String title,
 
@@ -20,6 +22,6 @@ public record TrainingCreatedDTO(
         int status
 ) {
         public TrainingCreatedDTO(Training training) {
-                this(training.getTitle(), training.getLimit_date(), training.getUser().getId(), training.getStatus());
+                this(training.getId(), training.getTitle(), training.getLimit_date(), training.getUser().getId(), training.getStatus());
         }
 }

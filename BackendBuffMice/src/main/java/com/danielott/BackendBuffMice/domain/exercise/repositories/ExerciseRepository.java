@@ -13,4 +13,5 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
     List<Exercise> findByMuscleContainingIgnoreCase(String muscle);
 
+    boolean existsByIdIsNotNull();
 }

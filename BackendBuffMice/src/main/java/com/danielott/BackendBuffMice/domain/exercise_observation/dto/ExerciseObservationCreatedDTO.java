@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record ExerciseObservationCreatedDTO(
+        Long id,
+
         @NotNull
         Long exercise_id,
 
@@ -18,6 +20,6 @@ public record ExerciseObservationCreatedDTO(
         int status
 ) {
     public ExerciseObservationCreatedDTO(ExerciseObservation exerciseObservation) {
-        this(exerciseObservation.getExercise().getId(), exerciseObservation.getUser().getId(), exerciseObservation.getObservation(), exerciseObservation.getStatus());
+        this(exerciseObservation.getId(), exerciseObservation.getExercise().getId(), exerciseObservation.getUser().getId(), exerciseObservation.getObservation(), exerciseObservation.getStatus());
     }
 }

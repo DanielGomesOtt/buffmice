@@ -3,12 +3,14 @@ package com.danielott.BackendBuffMice.services;
 import com.danielott.BackendBuffMice.domain.exercise.repositories.ExerciseRepository;
 import com.danielott.BackendBuffMice.domain.training.repositories.TrainingRepository;
 import com.danielott.BackendBuffMice.domain.training_exercises.TrainingExercises;
+import com.danielott.BackendBuffMice.domain.training_exercises.dto.TrainingExerciseFormattedDTO;
 import com.danielott.BackendBuffMice.domain.training_exercises.repositories.TrainingExercisesRepository;
 import com.danielott.BackendBuffMice.domain.training_exercises.dto.TrainingExercisesCreatedDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +38,24 @@ public class TrainingExercisesService {
             repository.saveAll(createdTrainingExercises);
             var formatedCreatedTrainingExercises = createdTrainingExercises.stream().map(TrainingExercisesCreatedDTO::new);
             return formatedCreatedTrainingExercises.toList();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<TrainingExerciseFormattedDTO> find(Long id) {
+        try{
+            List<TrainingExerciseFormattedDTO> trainingExercises = repository.findActiveTrainingExercisesByTrainingId(id);
+            return trainingExercises;
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+            TrainingExercises deletedTrainingExercise = repository.findByIdAndStatus(id, 1).get();
+            deletedTrainingExercise.setStatus(0);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
