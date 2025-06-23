@@ -48,4 +48,10 @@ public class Training {
         this.id = id;
         this.status = status;
     }
+
+    public Training(String title, int status, Users user) {
+        this.title = title;
+        this.status = status;
+        this.user = user;
+    }
 }

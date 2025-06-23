@@ -45,7 +45,7 @@ public class TrainingExercisesService {
 
     public List<TrainingExerciseFormattedDTO> find(Long id) {
         try{
-            List<TrainingExerciseFormattedDTO> trainingExercises = repository.findActiveTrainingExercisesByTrainingId(id);
+            List<TrainingExerciseFormattedDTO> trainingExercises = repository.findActiveTrainingExercisesByTrainingId(id).get();
             return trainingExercises;
         } catch (RuntimeException e) {
             throw new RuntimeException(e);

@@ -17,7 +17,7 @@ public interface TrainingExercisesRepository  extends JpaRepository<TrainingExer
             "JOIN te.training t " +
             "JOIN te.exercise e " +
             "WHERE te.status = 1 AND t.id = :id")
-    List<TrainingExerciseFormattedDTO> findActiveTrainingExercisesByTrainingId(@Param("id") Long id);
+    Optional<List<TrainingExerciseFormattedDTO>> findActiveTrainingExercisesByTrainingId(@Param("id") Long id);
 
     Optional<TrainingExercises> findByIdAndStatus(Long id, int status);
 }

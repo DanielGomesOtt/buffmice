@@ -33,6 +33,12 @@ public class Users implements UserDetails {
         this.password = data.password();
     }
 
+    public Users(String s, String mail, String number) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
