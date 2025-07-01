@@ -28,8 +28,8 @@ class TrainingExercisesRepositoryTest {
     TrainingExercisesRepository trainingExercisesRepository;
 
     @Test
-    @DisplayName("Should get a list of training exercises")
-    void findActiveTrainingExercisesByTrainingIdCase1() {
+    @DisplayName("Should return a list of training exercises when they exist")
+    void shouldReturnActiveTrainingExercisesWhenTheyExist() {
         Users user = this.createUser();
         Training training = this.createTraining(user);
         Exercise exercise = this.createExercise();
@@ -41,8 +41,8 @@ class TrainingExercisesRepositoryTest {
     }
 
     @Test
-    @DisplayName("Should get a empty list of training exercises")
-    void findActiveTrainingExercisesByTrainingIdCase2() {
+    @DisplayName("Should return an empty list when no training exercises exist")
+    void shouldReturnEmptyListWhenNoActiveTrainingExercisesExist() {
 
         Optional<List<TrainingExerciseFormattedDTO>> result = this.trainingExercisesRepository.findActiveTrainingExercisesByTrainingId(6L);
 

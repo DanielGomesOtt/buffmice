@@ -9,7 +9,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
-@Component
+
+//This component was used to fetch exercise data from the Exercise DB API for the first time.
+// To avoid issues for users who don’t have an Exercise DB account, I turned this process into a migration.
+//@Component
 public class ExerciseDataInitializer {
 
     @Autowired
@@ -18,7 +21,7 @@ public class ExerciseDataInitializer {
     @Autowired
     private ExternalExerciseService service;
 
-    @EventListener(ApplicationReadyEvent.class)
+    //@EventListener(ApplicationReadyEvent.class)
     public void init() {
         if(!repository.existsByIdIsNotNull()) {
             var exercises = service.fetchExercises();
