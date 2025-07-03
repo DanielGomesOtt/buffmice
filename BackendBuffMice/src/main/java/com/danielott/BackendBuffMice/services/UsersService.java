@@ -2,10 +2,13 @@ package com.danielott.BackendBuffMice.services;
 
 import com.danielott.BackendBuffMice.domain.users.Users;
 import com.danielott.BackendBuffMice.domain.users.repositories.UsersRepository;
+import com.danielott.BackendBuffMice.domain.users.validations.UsersValidation;
 import com.danielott.BackendBuffMice.infra.security.SecurityConfiguration;
 import com.danielott.BackendBuffMice.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UsersService {
@@ -19,8 +22,12 @@ public class UsersService {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private List<UsersValidation> validations;
+
     public String save (Users user) {
         try {
+            validations.forEach(validation -> validation.validate(user));
             var passwordEncoder = security.passwordEncoder();
             String passwordEncoded = passwordEncoder.encode(user.getPassword());
             user.setPassword(passwordEncoded);
