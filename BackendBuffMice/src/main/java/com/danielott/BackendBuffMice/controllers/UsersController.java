@@ -6,7 +6,6 @@ import com.danielott.BackendBuffMice.domain.users.dto.UsersDetailsDTO;
 import com.danielott.BackendBuffMice.domain.users.dto.UsersRegisterDTO;
 import com.danielott.BackendBuffMice.services.UsersService;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,7 @@ public class UsersController {
 
     @PostMapping("/register")
     @Transactional
-    public ResponseEntity save (@RequestBody @Valid UsersRegisterDTO data, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<?> save (@RequestBody UsersRegisterDTO data, UriComponentsBuilder uriBuilder) {
         var user = new Users(data);
         String token = service.save(user);
 

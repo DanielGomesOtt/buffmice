@@ -24,14 +24,14 @@ public class TrainingController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<TrainingCreatedDTO> save (@RequestBody @Valid TrainingCreatedDTO data) {
+    public ResponseEntity<TrainingCreatedDTO> save (@RequestBody TrainingCreatedDTO data) {
         TrainingCreatedDTO createdTraining = service.save(data);
         return ResponseEntity.status(201).body(createdTraining);
     }
 
     @PutMapping
     @Transactional
-    public ResponseEntity<TrainingUpdateDTO> update (@RequestBody @Valid TrainingUpdateDTO data) {
+    public ResponseEntity<TrainingUpdateDTO> update (@RequestBody TrainingUpdateDTO data) {
         Training updatedTraining = service.update(data);
         TrainingUpdateDTO formattedUpdatedTraining = new TrainingUpdateDTO(updatedTraining);
         return ResponseEntity.ok(formattedUpdatedTraining);
@@ -39,7 +39,7 @@ public class TrainingController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity delete (@PathVariable Long id) {
+    public ResponseEntity<?> delete (@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

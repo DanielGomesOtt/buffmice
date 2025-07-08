@@ -14,7 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-public class SecurityFillter extends OncePerRequestFilter {
+public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     private TokenService tokenService;
@@ -29,7 +29,7 @@ public class SecurityFillter extends OncePerRequestFilter {
             var subject = tokenService.verifyToken(authorization);
             var user = repository.findByEmail(subject);
 
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            var authentication = new UsernamePasswordAuthenticationToken(user.get(), null, user.get().getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 

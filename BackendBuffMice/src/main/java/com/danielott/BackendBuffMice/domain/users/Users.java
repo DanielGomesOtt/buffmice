@@ -33,7 +33,7 @@ public class Users implements UserDetails {
         this.password = data.password();
     }
 
-    public Users(String s, String mail, String number) {
+    public Users(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

@@ -1,6 +1,7 @@
 package com.danielott.BackendBuffMice.controllers;
 
 import com.danielott.BackendBuffMice.domain.auth.dto.AuthResponseDTO;
+import com.danielott.BackendBuffMice.domain.auth.validations.AuthValidation;
 import com.danielott.BackendBuffMice.domain.users.Users;
 import com.danielott.BackendBuffMice.domain.users.dto.UserLoginDTO;
 import com.danielott.BackendBuffMice.infra.security.TokenService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -25,11 +28,14 @@ public class AuthController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private List<AuthValidation> validations;
+
     @PostMapping
-    public ResponseEntity<AuthResponseDTO> login (@RequestBody @Valid UserLoginDTO data) {
+    public ResponseEntity<AuthResponseDTO> login (@RequestBody UserLoginDTO data) {
+        validations.forEach(validation -> validation.validate(data));
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         Authentication authentication = authenticationManager.authenticate(token);
-
         String authenticationToken = tokenService.signToken((Users) authentication.getPrincipal());
         return ResponseEntity.ok(new AuthResponseDTO(authenticationToken));
     }

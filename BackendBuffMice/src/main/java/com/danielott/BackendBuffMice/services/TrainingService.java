@@ -5,11 +5,11 @@ import com.danielott.BackendBuffMice.domain.training.dto.TrainingCreatedDTO;
 import com.danielott.BackendBuffMice.domain.training.dto.TrainingFormatted;
 import com.danielott.BackendBuffMice.domain.training.dto.TrainingUpdateDTO;
 import com.danielott.BackendBuffMice.domain.training.repositories.TrainingRepository;
+import com.danielott.BackendBuffMice.domain.training.validations.TrainingValidation;
 import com.danielott.BackendBuffMice.domain.users.Users;
 import com.danielott.BackendBuffMice.domain.users.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -19,23 +19,25 @@ public class TrainingService {
 
     @Autowired
     private TrainingRepository repository;
+
     @Autowired
     private UsersRepository usersRepository;
 
+    @Autowired
+    private List<TrainingValidation> validations;
+
     public TrainingCreatedDTO save (TrainingCreatedDTO data) {
-        try {
-            var user = usersRepository.findById(data.users_id()).get();
-            Training training = new Training(null, data.title(), data.limit_date(), data.status(), user);
-            Training createdTraining = repository.save(training);
-            return new TrainingCreatedDTO(createdTraining);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
+        Users user = usersRepository.findById(data.users_id()).get();
+        Training training = new Training(null, data.title(), data.limit_date(), data.status(), user);
+
+        validations.forEach(validation -> validation.validate(training));
+
+        Training createdTraining = repository.save(training);
+        return new TrainingCreatedDTO(createdTraining);
     }
 
     public Training update (TrainingUpdateDTO data) {
         try {
-            Users user = usersRepository.findById(data.id()).get();
             Training updatedTraining = repository.findById(data.id()).get();
             if(data.title() != null) {
                 updatedTraining.setTitle(data.title());
