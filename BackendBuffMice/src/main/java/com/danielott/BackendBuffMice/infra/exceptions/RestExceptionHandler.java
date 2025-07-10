@@ -1,6 +1,7 @@
 package com.danielott.BackendBuffMice.infra.exceptions;
 
 import com.danielott.BackendBuffMice.exceptions.AuthLoginValidationException;
+import com.danielott.BackendBuffMice.exceptions.ExerciseObservationCreationException;
 import com.danielott.BackendBuffMice.exceptions.TrainingCreationException;
 import com.danielott.BackendBuffMice.exceptions.UserRegisterValidationException;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(TrainingCreationException.class)
     private ResponseEntity<RestErrorMessage> trainingCreationException (TrainingCreationException exception) {
+        RestErrorMessage response = new RestErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(ExerciseObservationCreationException.class)
+    private ResponseEntity<RestErrorMessage> exerciseObservationCreationException (ExerciseObservationCreationException exception) {
         RestErrorMessage response = new RestErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }

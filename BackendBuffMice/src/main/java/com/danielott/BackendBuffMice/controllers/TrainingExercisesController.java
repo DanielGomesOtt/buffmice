@@ -4,7 +4,6 @@ import com.danielott.BackendBuffMice.domain.training_exercises.dto.TrainingExerc
 import com.danielott.BackendBuffMice.domain.training_exercises.dto.TrainingExercisesCreatedDTO;
 import com.danielott.BackendBuffMice.services.TrainingExercisesService;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class TrainingExercisesController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<List<TrainingExercisesCreatedDTO>> save (@RequestBody @Valid List<TrainingExercisesCreatedDTO> data) {
+    public ResponseEntity<List<TrainingExercisesCreatedDTO>> save (@RequestBody List<TrainingExercisesCreatedDTO> data) {
         List<TrainingExercisesCreatedDTO>createdTrainingExercises = service.save(data);
         return ResponseEntity.status(201).body(createdTrainingExercises);
     }
@@ -31,7 +30,7 @@ public class TrainingExercisesController {
     }
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

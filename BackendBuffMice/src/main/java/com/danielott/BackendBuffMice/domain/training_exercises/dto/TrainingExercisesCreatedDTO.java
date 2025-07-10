@@ -4,13 +4,10 @@ import com.danielott.BackendBuffMice.domain.training_exercises.TrainingExercises
 import jakarta.validation.constraints.NotNull;
 
 public record TrainingExercisesCreatedDTO(
-        @NotNull
         Long training_id,
 
-        @NotNull
         Long exercise_id,
 
-        @NotNull
         int status
 ) {
     public TrainingExercisesCreatedDTO(TrainingExercises trainingExercises) {

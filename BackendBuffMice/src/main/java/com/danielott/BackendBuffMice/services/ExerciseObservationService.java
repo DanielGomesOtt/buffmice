@@ -6,6 +6,7 @@ import com.danielott.BackendBuffMice.domain.exercise_observation.ExerciseObserva
 import com.danielott.BackendBuffMice.domain.exercise_observation.dto.ExerciseObservationCreatedDTO;
 import com.danielott.BackendBuffMice.domain.exercise_observation.dto.ExerciseObservationFormattedDTO;
 import com.danielott.BackendBuffMice.domain.exercise_observation.repositories.ExerciseObservationRepository;
+import com.danielott.BackendBuffMice.domain.exercise_observation.validations.ExerciseObservationValidation;
 import com.danielott.BackendBuffMice.domain.users.Users;
 import com.danielott.BackendBuffMice.domain.users.repositories.UsersRepository;
 
@@ -27,29 +28,24 @@ public class ExerciseObservationService {
     @Autowired
     private ExerciseRepository exerciseRepository;
 
-    public ExerciseObservationCreatedDTO save(ExerciseObservationCreatedDTO data){
-        try {
-            Users user = usersRepository.findById(data.user_id()).get();
-            Exercise exercise = exerciseRepository.findById(data.exercise_id()).get();
-            ExerciseObservation exerciseObservation = new ExerciseObservation(exercise, user, data.observation(), data.status());
-            ExerciseObservation createdExerciseObservation = repository.save(exerciseObservation);
-            return new ExerciseObservationCreatedDTO(createdExerciseObservation);
+    @Autowired
+    private List<ExerciseObservationValidation> validations;
 
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
+    public ExerciseObservationCreatedDTO save(ExerciseObservationCreatedDTO data){
+        Users user = usersRepository.findById(data.user_id()).get();
+        Exercise exercise = exerciseRepository.findById(data.exercise_id()).get();
+        ExerciseObservation exerciseObservation = new ExerciseObservation(exercise, user, data.observation(), data.status());
+        validations.forEach(validation -> validation.validate(exerciseObservation));
+        ExerciseObservation createdExerciseObservation = repository.save(exerciseObservation);
+        return new ExerciseObservationCreatedDTO(createdExerciseObservation);
     }
 
     public List<ExerciseObservationFormattedDTO> find(Long exercise_id, Long user_id) {
-        try {
-            Users user = usersRepository.findById(user_id).get();
-            Exercise exercise = exerciseRepository.findById(exercise_id).get();
-            return repository
-                    .findByExerciseAndUserAndStatus(exercise, user, 1).stream()
-                    .map(ExerciseObservationFormattedDTO::new).toList();
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
+        Users user = usersRepository.findById(user_id).get();
+        Exercise exercise = exerciseRepository.findById(exercise_id).get();
+        return repository
+                .findByExerciseAndUserAndStatus(exercise, user, 1).stream()
+                .map(ExerciseObservationFormattedDTO::new).toList();
     }
 
 

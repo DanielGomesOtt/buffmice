@@ -19,7 +19,7 @@ public class ExerciseObservationController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ExerciseObservationCreatedDTO> save(@RequestBody @Valid ExerciseObservationCreatedDTO data) {
+    public ResponseEntity<ExerciseObservationCreatedDTO> save(@RequestBody ExerciseObservationCreatedDTO data) {
         ExerciseObservationCreatedDTO createdExerciseObservation = service.save(data);
         return ResponseEntity.status(201).body(createdExerciseObservation);
     }
